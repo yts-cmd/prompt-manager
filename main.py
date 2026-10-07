@@ -82,11 +82,36 @@ def show_list():
         return
 
     for idx, p in enumerate(prompts, 1):
-        # 즐겨찾기면 ★, 아니면 빈칸 표시
         fav_mark = " ★" if p["favorite"] else ""
         print(f"{idx}. [{p['category']}] {p['title']}{fav_mark}")
         
     print(f"\n총 {len(prompts)}개의 프롬프트")
+
+def show_by_category():
+    """선택한 카테고리의 프롬프트만 조회하는 함수"""
+    print("\n=== 카테고리별 조회 ===")
+    for idx, cat in enumerate(CATEGORIES, 1):
+        print(f"{idx}) {cat}")
+
+    while True:
+        choice = input("선택: ").strip()
+        if choice.isdigit() and 1 <= int(choice) <= len(CATEGORIES):
+            selected_cat = CATEGORIES[int(choice) - 1]
+            break
+        print("[경고] 올바른 번호를 선택해 주세요.")
+
+    filtered = [p for p in prompts if p["category"] == selected_cat]
+
+    print(f"\n[{selected_cat}] 카테고리 프롬프트:")
+    if not filtered:
+        print("해당 카테고리에 등록된 프롬프트가 없습니다.")
+        return
+
+    for idx, p in enumerate(filtered, 1):
+        fav_mark = " ★" if p["favorite"] else ""
+        print(f"{idx}. {p['title']}{fav_mark}")
+
+    print(f"\n총 {len(filtered)}개의 프롬프트")
 
 def main():
     while True:
@@ -98,7 +123,7 @@ def main():
         elif choice == "2":
             show_list()
         elif choice == "3":
-            print("[알림] 카테고리별 조회 기능은 준비 중입니다.")
+            show_by_category()
         elif choice == "4":
             print("[알림] 프롬프트 검색 기능은 준비 중입니다.")
         elif choice == "5":
