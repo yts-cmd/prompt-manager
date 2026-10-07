@@ -1,5 +1,8 @@
 # 나만의 프롬프트 관리 프로그램
 
+# 기본 카테고리 목록
+CATEGORIES = ["텍스트 생성", "이미지 생성", "영상 생성", "페르소나", "자동화", "기타"]
+
 # 기본 프롬프트 데이터 (최소 3개 등록)
 prompts = [
     {
@@ -35,13 +38,53 @@ def show_menu():
     print("0. 종료")
     print("===========================")
 
+def add_prompt():
+    """새로운 프롬프트 등록 함수"""
+    print("\n=== 프롬프트 추가 ===")
+    
+    # 1. 제목 입력 (빈값 검증)
+    while True:
+        title = input("제목: ").strip()
+        if title:
+            break
+        print("[경고] 제목은 비어 있을 수 없습니다. 다시 입력해 주세요.")
+
+    # 2. 내용 입력 (빈값 검증)
+    while True:
+        content = input("내용: ").strip()
+        if content:
+            break
+        print("[경고] 내용은 비어 있을 수 없습니다. 다시 입력해 주세요.")
+
+    # 3. 카테고리 선택
+    print("\n카테고리 선택:")
+    for idx, cat in enumerate(CATEGORIES, 1):
+        print(f"{idx}) {cat}")
+
+    while True:
+        cat_choice = input("선택: ").strip()
+        if cat_choice.isdigit() and 1 <= int(cat_choice) <= len(CATEGORIES):
+            category = CATEGORIES[int(cat_choice) - 1]
+            break
+        print("[경고] 올바른 카테고리 번호를 선택해 주세요.")
+
+    # 4. 데이터 저장 (즐겨찾기 기본값 False)
+    new_item = {
+        "title": title,
+        "content": content,
+        "category": category,
+        "favorite": False
+    }
+    prompts.append(new_item)
+    print("\n프롬프트가 성공적으로 추가되었습니다!")
+
 def main():
     while True:
         show_menu()
         choice = input("선택: ").strip()
 
         if choice == "1":
-            print("[알림] 프롬프트 추가 기능은 준비 중입니다.")
+            add_prompt()
         elif choice == "2":
             print("[알림] 프롬프트 목록 기능은 준비 중입니다.")
         elif choice == "3":
