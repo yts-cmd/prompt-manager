@@ -113,6 +113,28 @@ def show_by_category():
 
     print(f"\n총 {len(filtered)}개의 프롬프트")
 
+def search_prompt():
+    """키워드로 제목 및 내용을 검색하는 함수"""
+    print("\n=== 프롬프트 검색 ===")
+    keyword = input("검색어: ").strip()
+
+    if not keyword:
+        print("[경고] 검색어를 입력해 주세요.")
+        return
+
+    results = [p for p in prompts if keyword in p["title"] or keyword in p["content"]]
+
+    print("\n검색 결과:")
+    if not results:
+        print("일치하는 프롬프트가 없습니다.")
+        return
+
+    for idx, p in enumerate(results, 1):
+        fav_mark = " ★" if p["favorite"] else ""
+        print(f"{idx}. [{p['category']}] {p['title']}{fav_mark}")
+
+    print(f"\n{len(results)}개의 프롬프트를 찾았습니다.")
+
 def main():
     while True:
         show_menu()
@@ -123,20 +145,4 @@ def main():
         elif choice == "2":
             show_list()
         elif choice == "3":
-            show_by_category()
-        elif choice == "4":
-            print("[알림] 프롬프트 검색 기능은 준비 중입니다.")
-        elif choice == "5":
-            print("[알림] 프롬프트 상세 보기 기능은 준비 중입니다.")
-        elif choice == "6":
-            print("[알림] 즐겨찾기 관리 기능은 준비 중입니다.")
-        elif choice == "7":
-            print("[알림] 즐겨찾기 목록 기능은 준비 중입니다.")
-        elif choice == "0":
-            print("프로그램을 종료합니다. 이용해 주셔서 감사합니다.")
-            break
-        else:
-            print("[오류] 잘못된 번호입니다. 다시 입력해 주세요.")
-
-if __name__ == "__main__":
-    main()
+            show_by
