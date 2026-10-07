@@ -22,4 +22,43 @@ prompts = [
     }
 ]
 
-print(f"등록된 기본 프롬프트 개수: {len(prompts)}개")
+def show_menu():
+    """메인 메뉴 출력 함수"""
+    print("\n=== 나만의 프롬프트 관리 ===")
+    print("1. 프롬프트 추가")
+    print("2. 프롬프트 목록")
+    print("3. 카테고리별 조회")
+    print("4. 프롬프트 검색")
+    print("5. 프롬프트 상세 보기")
+    print("6. 즐겨찾기 관리")
+    print("7. 즐겨찾기 목록")
+    print("0. 종료")
+    print("===========================")
+
+def main():
+    while True:
+        show_menu()
+        choice = input("선택: ").strip()
+
+        if choice == "1":
+            print("[알림] 프롬프트 추가 기능은 준비 중입니다.")
+        elif choice == "2":
+            print("[알림] 프롬프트 목록 기능은 준비 중입니다.")
+        elif choice == "3":
+            print("[알림] 카테고리별 조회 기능은 준비 중입니다.")
+        elif choice == "4":
+            print("[알림] 프롬프트 검색 기능은 준비 중입니다.")
+        elif choice == "5":
+            print("[알림] 프롬프트 상세 보기 기능은 준비 중입니다.")
+        elif choice == "6":
+            print("[알림] 즐겨찾기 관리 기능은 준비 중입니다.")
+        elif choice == "7":
+            print("[알림] 즐겨찾기 목록 기능은 준비 중입니다.")
+        elif choice == "0":
+            print("프로그램을 종료합니다. 이용해 주셔서 감사합니다.")
+            break
+        else:
+            print("[오류] 잘못된 번호입니다. 다시 입력해 주세요.")
+
+if __name__ == "__main__":
+    main()
