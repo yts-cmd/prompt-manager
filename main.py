@@ -135,6 +135,27 @@ def search_prompt():
 
     print(f"\n{len(results)}개의 프롬프트를 찾았습니다.")
 
+def show_detail():
+    """프롬프트의 상세 내용을 확인하는 함수"""
+    print("\n=== 프롬프트 상세 보기 ===")
+    if not prompts:
+        print("등록된 프롬프트가 없습니다.")
+        return
+
+    num_input = input("번호 입력: ").strip()
+    if not num_input.isdigit() or not (1 <= int(num_input) <= len(prompts)):
+        print("[경고] 유효한 프롬프트 번호를 입력해 주세요.")
+        return
+
+    target = prompts[int(num_input) - 1]
+    fav_status = "★ (즐겨찾기)" if target["favorite"] else "☆ (미등록)"
+
+    print(f"\n제목: {target['title']}")
+    print(f"카테고리: {target['category']}")
+    print(f"즐겨찾기: {fav_status}")
+    print("내용:")
+    print(target["content"])
+
 def main():
     while True:
         show_menu()
@@ -145,4 +166,20 @@ def main():
         elif choice == "2":
             show_list()
         elif choice == "3":
-            show_by
+            show_by_category()
+        elif choice == "4":
+            search_prompt()
+        elif choice == "5":
+            show_detail()
+        elif choice == "6":
+            print("[알림] 즐겨찾기 관리 기능은 준비 중입니다.")
+        elif choice == "7":
+            print("[알림] 즐겨찾기 목록 기능은 준비 중입니다.")
+        elif choice == "0":
+            print("프로그램을 종료합니다. 이용해 주셔서 감사합니다.")
+            break
+        else:
+            print("[오류] 잘못된 번호입니다. 다시 입력해 주세요.")
+
+if __name__ == "__main__":
+    main()
